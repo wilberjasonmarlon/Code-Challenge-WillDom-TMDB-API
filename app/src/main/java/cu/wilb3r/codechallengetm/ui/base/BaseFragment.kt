@@ -8,11 +8,9 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment<T : ViewBinding>: Fragment() {
+abstract class BaseFragment<T : ViewBinding> : Fragment() {
 
     private var _binding: T? = null
 
@@ -92,14 +90,6 @@ abstract class BaseFragment<T : ViewBinding>: Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = context as AppCompatActivity
-    }
-
-    override fun onPause() {
-        super.onPause()
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     fun hideKeyboard() = getParent().hideKeyboard()

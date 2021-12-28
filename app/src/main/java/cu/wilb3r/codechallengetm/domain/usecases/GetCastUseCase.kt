@@ -12,15 +12,22 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetCastUseCase @Inject constructor(private val repo: MovieRepository, @ApplicationContext val context: Context) {
+class GetCastUseCase @Inject constructor(
+    private val repo: MovieRepository,
+    @ApplicationContext val context: Context
+) {
     operator fun invoke(video_id: Int): Flow<Resource<List<Cast>>> = flow {
         try {
             emit(Resource.Loading<List<Cast>>())
             val response = repo.getCast(video_id)
-            if(response.isSuccessful)
+            if (response.isSuccessful)
                 emit(Resource.Success<List<Cast>>(response.body()!!.cast))
         } catch (e: HttpException) {
-            emit(Resource.Error<List<Cast>>(e.localizedMessage ?: context.resources.getString(R.string.unexpected_error)))
+            emit(
+                Resource.Error<List<Cast>>(
+                    e.localizedMessage ?: context.resources.getString(R.string.unexpected_error)
+                )
+            )
         } catch (e: IOException) {
             emit(Resource.Error<List<Cast>>(context.resources.getString(R.string.no_internet)))
         }

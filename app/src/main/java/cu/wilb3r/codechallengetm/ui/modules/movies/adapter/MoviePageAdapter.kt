@@ -43,7 +43,10 @@ class MoviePageAdapter @Inject constructor(private var imageLoader: ImageLoader)
         onItemClickListener = listener
     }
 
-    override fun onBindViewHolder(holder: MovieViewHolder, @SuppressLint("RecyclerView") position: Int) {
+    override fun onBindViewHolder(
+        holder: MovieViewHolder,
+        @SuppressLint("RecyclerView") position: Int
+    ) {
         getItem(position)?.let { item ->
             holder.apply {
                 bind(item)

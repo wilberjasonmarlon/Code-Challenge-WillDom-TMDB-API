@@ -12,7 +12,8 @@ import dagger.hilt.android.components.FragmentComponent
 @InstallIn(FragmentComponent::class)
 object AdaptersModule {
     @Provides
-    fun provideMoviePageAdapter(imageLoader: ImageLoader): MoviePageAdapter = MoviePageAdapter(imageLoader).apply {
-        stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT
-    }
+    fun provideMoviePageAdapter(imageLoader: ImageLoader): MoviePageAdapter =
+        MoviePageAdapter(imageLoader).apply {
+            stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT
+        }
 }

@@ -58,7 +58,16 @@ fun movieFromEntity(item: DBMovie) =
     )
 
 fun DBMovie.toMedia() =
-    Media(id ?: 0, poster_path, backdrop_path, title, overview, vote_average, vote_count, MediaType.VIDEO)
+    Media(
+        id ?: 0,
+        poster_path,
+        backdrop_path,
+        title,
+        overview,
+        vote_average,
+        vote_count,
+        MediaType.VIDEO
+    )
 
 fun DBMovie.toMoviePopular(page: Int) = MoviePopular(id, page)
 fun DBMovie.toMovieTop(page: Int) = MovieTop(id, page)

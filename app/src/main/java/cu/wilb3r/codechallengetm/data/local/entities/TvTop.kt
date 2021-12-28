@@ -19,5 +19,5 @@ data class TvTop(
     @PrimaryKey(autoGenerate = false)
     val tv_id: Int?,
     val page: Int
-): Parcelable
+) : Parcelable
 

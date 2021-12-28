@@ -13,15 +13,12 @@ import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import cu.wilb3r.codechallengetm.R
 import cu.wilb3r.codechallengetm.ef.dpToPx
-import java.util.prefs.Preferences
-import javax.inject.Inject
 
 abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
 

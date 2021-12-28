@@ -23,6 +23,7 @@ class SearchFragment @Inject constructor() : BaseFragment<FragmentSearchBinding>
 
     @Inject
     lateinit var searchAdapter: SearchAdapter
+
     @Inject
     lateinit var detailFragment: DetailFragment
 

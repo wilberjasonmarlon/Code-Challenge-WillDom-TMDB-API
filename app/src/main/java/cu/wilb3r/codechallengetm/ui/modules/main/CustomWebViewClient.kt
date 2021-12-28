@@ -7,9 +7,7 @@ import android.webkit.WebViewClient
 import android.widget.ProgressBar
 
 
-
-
-class CustomWebViewClient(private val progressBar: ProgressBar): WebViewClient() {
+class CustomWebViewClient(private val progressBar: ProgressBar) : WebViewClient() {
 
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
         return false

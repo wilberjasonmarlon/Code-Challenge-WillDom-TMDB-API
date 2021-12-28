@@ -2,7 +2,6 @@ package cu.wilb3r.codechallengetm.data.local.mapper
 
 import cu.wilb3r.codechallengetm.data.remote.model.dell.SearchResult
 import cu.wilb3r.codechallengetm.domain.model.Media
-import cu.wilb3r.codechallengetm.domain.model.MediaType
 
 fun SearchResult.toMedia() = Media(
     id,

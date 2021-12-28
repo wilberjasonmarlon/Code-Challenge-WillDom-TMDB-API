@@ -4,7 +4,10 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import cu.wilb3r.codechallengetm.data.local.db.dao.*
+import cu.wilb3r.codechallengetm.data.local.db.dao.TvAndTvPopular
+import cu.wilb3r.codechallengetm.data.local.db.dao.TvAndTvTop
+import cu.wilb3r.codechallengetm.data.local.db.dao.TvPopularDao
+import cu.wilb3r.codechallengetm.data.local.db.dao.TvTopDao
 import cu.wilb3r.codechallengetm.data.repository.tv.datasource.PopularTvRemoteMediator
 import cu.wilb3r.codechallengetm.data.repository.tv.datasource.TopTvRemoteMediator
 import cu.wilb3r.codechallengetm.domain.datasource.CastDataSource

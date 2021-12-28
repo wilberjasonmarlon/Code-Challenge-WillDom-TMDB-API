@@ -7,14 +7,14 @@ import androidx.lifecycle.ViewModel
 
 open class BaseViewModel : ViewModel() {
 
-    protected var showProgressBarMLD : MutableLiveData<Boolean> = MutableLiveData(false)
+    protected var showProgressBarMLD: MutableLiveData<Boolean> = MutableLiveData(false)
 
     private val onDefaultErrorMLD: MutableLiveData<Pair<Error, Int>> = MutableLiveData()
 
     protected val shimmerShowMLD: MutableLiveData<Boolean> = MutableLiveData()
     protected val onShouldShowLoadingMLD: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun onCreate(){
+    fun onCreate() {
         println("=============================| onCreate |=============================")
     }
 

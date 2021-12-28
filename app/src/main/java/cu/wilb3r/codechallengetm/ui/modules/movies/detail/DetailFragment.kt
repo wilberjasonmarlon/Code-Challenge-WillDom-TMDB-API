@@ -38,7 +38,8 @@ class DetailFragment : BaseBottomSheetDialogFragment() {
     @Inject
     lateinit var videoAdapter: VideoAdapter
 
-    @Inject lateinit var imageLoader: ImageLoader
+    @Inject
+    lateinit var imageLoader: ImageLoader
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
@@ -76,7 +77,10 @@ class DetailFragment : BaseBottomSheetDialogFragment() {
         binding.constraintLayout.minHeight = displayMetrics.heightPixels
         binding.mediaInfo.backdropImage.transitionName = mMedia.poster_path.toString()
         binding.mediaInfo.mediaOverview.transitionName = mMedia.overview.toString()
-        binding.mediaInfo.backdropImage.load(Api.IMAGESURL + mMedia.backdrop_path.toString(), imageLoader)
+        binding.mediaInfo.backdropImage.load(
+            Api.IMAGESURL + mMedia.backdrop_path.toString(),
+            imageLoader
+        )
         binding.mediaInfo.mediaOverview.text = mMedia.overview
         startPostponedEnterTransition()
         setOnClick()
@@ -146,8 +150,10 @@ class DetailFragment : BaseBottomSheetDialogFragment() {
 
     private fun navigateYoutube(uri: String) {
         try {
-            startActivity(Intent(requireContext(), WebviewActivity::class.java)
-                .putExtra("url", uri))
+            startActivity(
+                Intent(requireContext(), WebviewActivity::class.java)
+                    .putExtra("url", uri)
+            )
         } catch (ex: ActivityNotFoundException) {
         }
     }

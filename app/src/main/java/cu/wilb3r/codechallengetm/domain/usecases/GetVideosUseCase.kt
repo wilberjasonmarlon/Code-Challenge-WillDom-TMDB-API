@@ -11,16 +11,17 @@ import java.io.IOException
 import javax.inject.Inject
 
 class GetVideosUseCase @Inject constructor(private val repo: CommonRepository) {
-    operator fun invoke(@MediaType type: String, id: Int): Flow<Resource<List<MediaResult>>> = flow {
-        try {
-            emit(Resource.Loading<List<MediaResult>>(emptyList<MediaResult>()))
-            val response = repo.getVideosForMedia(type, id)
-            if(response.isSuccessful)
-                emit(Resource.Success<List<MediaResult>>(response.body()!!.results))
-        } catch (e: HttpException) {
-            emit(Resource.Error<List<MediaResult>>(e.localizedMessage ?: "An error occured"))
-        } catch (e: IOException) {
-            emit(Resource.Error<List<MediaResult>>("Are you online?. Check your internet connection."))
+    operator fun invoke(@MediaType type: String, id: Int): Flow<Resource<List<MediaResult>>> =
+        flow {
+            try {
+                emit(Resource.Loading<List<MediaResult>>(emptyList<MediaResult>()))
+                val response = repo.getVideosForMedia(type, id)
+                if (response.isSuccessful)
+                    emit(Resource.Success<List<MediaResult>>(response.body()!!.results))
+            } catch (e: HttpException) {
+                emit(Resource.Error<List<MediaResult>>(e.localizedMessage ?: "An error occured"))
+            } catch (e: IOException) {
+                emit(Resource.Error<List<MediaResult>>("Are you online?. Check your internet connection."))
+            }
         }
-    }
 }

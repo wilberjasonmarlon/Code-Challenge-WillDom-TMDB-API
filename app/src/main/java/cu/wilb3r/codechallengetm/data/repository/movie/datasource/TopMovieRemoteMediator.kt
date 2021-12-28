@@ -50,7 +50,7 @@ class TopMovieRemoteMediator @Inject constructor(
                 val moviesT = ArrayList<MovieTop>()
                 result.forEach {
                     movies.add(it.toEntity())
-                    moviesT.add(MovieTop(it.id?:0, page))
+                    moviesT.add(MovieTop(it.id ?: 0, page))
                 }
                 movieDao.insertAll(movies)
                 movieTopDao.insertAll(moviesT)

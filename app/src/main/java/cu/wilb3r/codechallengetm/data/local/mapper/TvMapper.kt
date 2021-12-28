@@ -23,4 +23,13 @@ fun Tv.toEntity() =
         vote_count
     )
 
-fun DBTv.toMedia() = Media(id ?: 0, poster_path, backdrop_path, name, overview, vote_average, vote_count, MediaType.TV)
+fun DBTv.toMedia() = Media(
+    id ?: 0,
+    poster_path,
+    backdrop_path,
+    name,
+    overview,
+    vote_average,
+    vote_count,
+    MediaType.TV
+)

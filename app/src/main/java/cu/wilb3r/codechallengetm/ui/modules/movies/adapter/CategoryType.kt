@@ -3,7 +3,8 @@ package cu.wilb3r.codechallengetm.ui.modules.movies.adapter
 import androidx.annotation.IntDef
 
 @IntDef(CategoryType.POPULAR, CategoryType.TOP_RATED, CategoryType.TRENDING)
-@Target(AnnotationTarget.FUNCTION, AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.EXPRESSION,
+@Target(
+    AnnotationTarget.FUNCTION, AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.EXPRESSION,
     AnnotationTarget.CLASS,
     AnnotationTarget.TYPE
 )

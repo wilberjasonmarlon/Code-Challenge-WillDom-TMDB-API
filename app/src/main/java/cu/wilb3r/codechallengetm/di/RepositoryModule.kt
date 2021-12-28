@@ -1,15 +1,18 @@
 package cu.wilb3r.codechallengetm.di
 
 import androidx.paging.ExperimentalPagingApi
-import cu.wilb3r.codechallengetm.data.local.db.dao.*
+import cu.wilb3r.codechallengetm.data.local.db.dao.MoviePopularDao
+import cu.wilb3r.codechallengetm.data.local.db.dao.MovieTopDao
+import cu.wilb3r.codechallengetm.data.local.db.dao.TvPopularDao
+import cu.wilb3r.codechallengetm.data.local.db.dao.TvTopDao
 import cu.wilb3r.codechallengetm.data.remote.TMDBApiService
 import cu.wilb3r.codechallengetm.data.repository.CommonRepositoryImp
 import cu.wilb3r.codechallengetm.data.repository.GenreRepositoryImp
-import cu.wilb3r.codechallengetm.data.repository.movie.datasource.PopularMovieRemoteMediator
 import cu.wilb3r.codechallengetm.data.repository.movie.MovieRepositoryImp
+import cu.wilb3r.codechallengetm.data.repository.movie.datasource.PopularMovieRemoteMediator
 import cu.wilb3r.codechallengetm.data.repository.movie.datasource.TopMovieRemoteMediator
-import cu.wilb3r.codechallengetm.data.repository.tv.datasource.PopularTvRemoteMediator
 import cu.wilb3r.codechallengetm.data.repository.tv.TvRepositoryImp
+import cu.wilb3r.codechallengetm.data.repository.tv.datasource.PopularTvRemoteMediator
 import cu.wilb3r.codechallengetm.data.repository.tv.datasource.TopTvRemoteMediator
 import cu.wilb3r.codechallengetm.domain.datasource.CastDataSource
 import cu.wilb3r.codechallengetm.domain.repository.CommonRepository
@@ -33,7 +36,8 @@ object RepositoryModule {
         pMediator: PopularMovieRemoteMediator,
         topMediator: TopMovieRemoteMediator,
         castDataSource: CastDataSource
-    ): MovieRepository = MovieRepositoryImp(moviePopularDao, movieTopDao, pMediator, topMediator, castDataSource)
+    ): MovieRepository =
+        MovieRepositoryImp(moviePopularDao, movieTopDao, pMediator, topMediator, castDataSource)
 
     @ExperimentalPagingApi
     @Provides
@@ -43,7 +47,13 @@ object RepositoryModule {
         popularRemoteMediator: PopularTvRemoteMediator,
         topRemoteMediator: TopTvRemoteMediator,
         castDataSource: CastDataSource
-    ): TvRepository = TvRepositoryImp(tvPopularDao, tvTopDao, popularRemoteMediator, topRemoteMediator, castDataSource)
+    ): TvRepository = TvRepositoryImp(
+        tvPopularDao,
+        tvTopDao,
+        popularRemoteMediator,
+        topRemoteMediator,
+        castDataSource
+    )
 
     @Provides
     fun provideGenreRepository(

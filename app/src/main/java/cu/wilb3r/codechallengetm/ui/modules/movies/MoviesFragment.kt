@@ -13,7 +13,6 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import coil.ImageLoader
 import cu.wilb3r.codechallengetm.data.local.entities.DBMovie
 import cu.wilb3r.codechallengetm.data.local.mapper.toMedia
 import cu.wilb3r.codechallengetm.databinding.FragmentMoviesBinding
@@ -62,7 +61,6 @@ class MoviesFragment @Inject constructor() : BaseFragment<FragmentMoviesBinding>
         initRecyclerView()
         loadData()
     }
-
 
 
     private fun loadData() {

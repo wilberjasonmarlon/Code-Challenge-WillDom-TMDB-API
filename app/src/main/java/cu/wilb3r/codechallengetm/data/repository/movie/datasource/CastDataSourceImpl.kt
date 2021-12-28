@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class CastDataSourceImpl @Inject constructor(
     private val api: TMDBApiService
-): CastDataSource {
+) : CastDataSource {
 
     private val param = HashMap<String, String>().apply {
         put(Api.API_KEY_STR, BuildConfig.API_KEY)

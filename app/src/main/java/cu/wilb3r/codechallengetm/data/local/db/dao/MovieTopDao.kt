@@ -4,13 +4,8 @@ import android.os.Parcelable
 import androidx.paging.PagingSource
 import androidx.room.*
 import cu.wilb3r.codechallengetm.data.local.entities.DBMovie
-import cu.wilb3r.codechallengetm.data.local.entities.MoviePopular
 import cu.wilb3r.codechallengetm.data.local.entities.MovieTop
-import cu.wilb3r.codechallengetm.data.remote.model.Movie
-import kotlinx.coroutines.flow.Flow
 import kotlinx.parcelize.Parcelize
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Dao
 interface MovieTopDao : BaseDao<MovieTop> {
@@ -32,4 +27,4 @@ data class MovieAndMovieTop(
     val movie: DBMovie,
     @Relation(parentColumn = "id", entityColumn = "movie_id")
     val MovieTop: List<MovieTop> = emptyList()
-): Parcelable
+) : Parcelable

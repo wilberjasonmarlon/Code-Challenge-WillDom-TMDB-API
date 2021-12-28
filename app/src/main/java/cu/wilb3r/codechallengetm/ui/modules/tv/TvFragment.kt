@@ -31,7 +31,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class TvFragment @Inject constructor(): BaseFragment<FragmentTvBinding>() {
+class TvFragment @Inject constructor() : BaseFragment<FragmentTvBinding>() {
 
     @Inject
     lateinit var popularAdapter: TvPageAdapter

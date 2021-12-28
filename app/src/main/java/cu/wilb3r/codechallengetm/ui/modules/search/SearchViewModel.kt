@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val useCase: SearchAnyUseCase
-): BaseViewModel() {
+) : BaseViewModel() {
 
     private val _result = MutableLiveData<Event<List<SearchResult>>>()
     val result: LiveData<Event<List<SearchResult>>>
@@ -23,7 +23,7 @@ class SearchViewModel @Inject constructor(
 
     fun searchAny(s: String) = viewModelScope.launch {
         useCase(s).collectLatest {
-            it.data?.let { data->
+            it.data?.let { data ->
                 _result.postValue(Event(data))
             }
         }

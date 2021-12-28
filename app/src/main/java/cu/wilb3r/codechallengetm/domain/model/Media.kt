@@ -13,4 +13,4 @@ data class Media(
     val vote_average: Double?,
     val vote_count: Int?,
     @MediaType val type: String
-):Parcelable
+) : Parcelable

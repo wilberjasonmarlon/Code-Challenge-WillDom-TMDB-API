@@ -36,7 +36,6 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
     }
 
 
-
     abstract fun getBindingView(): T
 
     protected open fun setUp(extras: Bundle?) {

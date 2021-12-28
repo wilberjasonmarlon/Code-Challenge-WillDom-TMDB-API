@@ -2,11 +2,8 @@ package cu.wilb3r.codechallengetm.data.local.db.dao
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
-import androidx.room.Insert
 import androidx.room.Query
 import cu.wilb3r.codechallengetm.data.local.entities.DBMovie
-import cu.wilb3r.codechallengetm.data.local.entities.DBTv
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MovieDao : BaseDao<DBMovie> {

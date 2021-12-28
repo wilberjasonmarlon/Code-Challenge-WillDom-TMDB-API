@@ -5,7 +5,10 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import cu.wilb3r.codechallengetm.BuildConfig.API_KEY
-import cu.wilb3r.codechallengetm.data.local.db.dao.*
+import cu.wilb3r.codechallengetm.data.local.db.dao.GenreDao
+import cu.wilb3r.codechallengetm.data.local.db.dao.TvAndTvTop
+import cu.wilb3r.codechallengetm.data.local.db.dao.TvDao
+import cu.wilb3r.codechallengetm.data.local.db.dao.TvTopDao
 import cu.wilb3r.codechallengetm.data.local.entities.DBTv
 import cu.wilb3r.codechallengetm.data.local.entities.TvTop
 import cu.wilb3r.codechallengetm.data.local.mapper.toEntity
