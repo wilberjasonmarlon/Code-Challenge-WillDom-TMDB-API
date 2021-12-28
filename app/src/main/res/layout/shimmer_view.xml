@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/label_popular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_8"
+            android:text="@string/popular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/shmpopular"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginBottom="@dimen/dp_8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_popular"
+            app:layout_constraintBottom_toTopOf="@id/guide_recycler_popular">
+            <include
+                layout="@layout/shimmer_item_movie"/>
+            <include
+                layout="@layout/shimmer_item_movie"/>
+            <include
+                layout="@layout/shimmer_item_movie"/>
+            <include
+                layout="@layout/shimmer_item_movie"/>
+            <include
+                layout="@layout/shimmer_item_movie"/>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/label_top_rated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_8"
+            android:text="@string/top_rated"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shmpopular" />
+
+        <LinearLayout
+            android:id="@+id/shm_top_rated"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/dp_8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_top_rated"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:listitem="@layout/item_list_movie" >
+            <include
+                layout="@layout/shimmer_item_list_movie"/>
+            <include
+                layout="@layout/shimmer_item_list_movie"/>
+            <include
+                layout="@layout/shimmer_item_list_movie"/>
+            <include
+                layout="@layout/shimmer_item_list_movie"/>
+            <include
+                layout="@layout/shimmer_item_list_movie"/>
+            <include
+                layout="@layout/shimmer_item_list_movie"/>
+            <include
+                layout="@layout/shimmer_item_list_movie"/>
+            <include
+                layout="@layout/shimmer_item_list_movie"/>
+            <include
+                layout="@layout/shimmer_item_list_movie"/>
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_recycler_popular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="270dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="304dp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

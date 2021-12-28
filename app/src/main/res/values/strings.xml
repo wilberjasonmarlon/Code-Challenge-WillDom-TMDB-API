@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Code Challenge TM</string>
+    <string name="movies">Movies</string>
+    <string name="tv">Tv</string>
+    <string name="search">Search</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="popular">Popular</string>
+    <string name="trending">Trending</string>
+    <string name="text_retry">retry</string>
+
+    <string name="overview">Overview</string>
+    <string name="cast">Cast</string>
+    <string name="unexpected_error">An unexpected error occurred</string>
+    <string name="no_internet">Couldn\'t reach server. Check your internet connection.</string>
+    <string name="videos">videos</string>
+    <string name="back">Back</string>
+    <string name="search_query_hint">Search for TV shows and movies</string>
+</resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.34791666666666665" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_add.xml" value="0.25833333333333336" />
+        <entry key="app/src/main/res/drawable/bg_gradient.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3489583333333333" />
+        <entry key="app/src/main/res/drawable/ic_spash.xml" value="0.10092592592592593" />
+        <entry key="app/src/main/res/drawable/poster_foreground.xml" value="0.3489583333333333" />
+        <entry key="app/src/main/res/drawable/poster_placeholder.xml" value="0.3489583333333333" />
+        <entry key="app/src/main/res/drawable/ratin_bar_tmp.xml" value="0.3489583333333333" />
+        <entry key="app/src/main/res/drawable/rating_bar.xml" value="0.3489583333333333" />
+        <entry key="app/src/main/res/drawable/ratingbar.xml" value="0.25833333333333336" />
+        <entry key="app/src/main/res/drawable/ratingbar_filled.xml" value="0.3489583333333333" />
+        <entry key="app/src/main/res/drawable/splash_background.xml" value="0.3101851851851852" />
+        <entry key="app/src/main/res/drawable/splash_image.xml" value="0.13796296296296295" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.2703125" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/empty_view.xml" value="0.234375" />
+        <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.2777777777777778" />
+        <entry key="app/src/main/res/layout/fragment_movies.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.3328125" />
+        <entry key="app/src/main/res/layout/fragment_test.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_tv.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_video_details.xml" value="0.3328125" />
+        <entry key="app/src/main/res/layout/fragment_web.xml" value="0.1828125" />
+        <entry key="app/src/main/res/layout/item_cast.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/item_list_movie.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_loading_state.xml" value="0.3328125" />
+        <entry key="app/src/main/res/layout/item_movie.xml" value="0.6342857142857142" />
+        <entry key="app/src/main/res/layout/item_video.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_view.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/shimmer_item_list_movie.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/shimmer_item_movie.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/shimmer_view.xml" value="0.20989583333333334" />
+        <entry key="app/src/main/res/layout/view_horizontal_list_media.xml" value="0.3015625" />
+        <entry key="app/src/main/res/layout/view_media_info.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.178125" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.33" />
+      </ProjectState>
+    </option>
+  </component>
+</project>
