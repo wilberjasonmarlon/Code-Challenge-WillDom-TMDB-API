@@ -81,6 +81,7 @@ class DetailFragment : BaseBottomSheetDialogFragment() {
             Api.IMAGESURL + mMedia.backdrop_path.toString(),
             imageLoader
         )
+        binding.mediaInfo.txtTitle.text = mMedia.name
         binding.mediaInfo.mediaOverview.text = mMedia.overview
         startPostponedEnterTransition()
         setOnClick()

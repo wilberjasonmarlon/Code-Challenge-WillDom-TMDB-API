@@ -17,6 +17,28 @@
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/poster_placeholder"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#7000"
+        app:layout_constraintBottom_toBottomOf="@+id/backdrop_image">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/label_overview"
         style="@style/TextAppearance.MaterialComponents.Subtitle1"
