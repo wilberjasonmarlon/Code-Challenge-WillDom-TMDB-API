@@ -23,7 +23,7 @@
 ### How to build 🛠  
 ```
 1-Git clone
-2-Call Android Studion from /File/Open
+2-Call it on Android Studio from /File/Open
 3-Sync Project with Gradle
 4-Done
 ```
