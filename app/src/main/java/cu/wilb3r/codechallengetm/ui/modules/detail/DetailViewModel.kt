@@ -1,4 +1,4 @@
-package cu.wilb3r.codechallengetm.ui.modules.movies.detail
+package cu.wilb3r.codechallengetm.ui.modules.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

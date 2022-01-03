@@ -22,6 +22,8 @@ class TvViewHolder(val binding: ViewBinding, val imageLoader: ImageLoader) :
                         binding.videoGenre.text = "$it".trim('[', ']')
                     }
                     val url = IMAGESURL + "${item.poster_path}"
+                    binding.videoTitle.transitionName = item.name.toString()
+                    binding.videoImage.transitionName = item.poster_path.toString()
                     binding.videoImage.load(url, imageLoader) {
                         transformations(RoundedCornersTransformation(25f))
                     }
@@ -34,6 +36,8 @@ class TvViewHolder(val binding: ViewBinding, val imageLoader: ImageLoader) :
                         binding.ratingBar.text = it.toString()
                     }
                     val url = IMAGESURL + "${item.poster_path}"
+                    binding.videoTitle.transitionName = item.name.toString()
+                    binding.videoImage.transitionName = item.poster_path.toString()
                     binding.videoImage.load(url, imageLoader) {
                         transformations(RoundedCornersTransformation(25f))
                     }

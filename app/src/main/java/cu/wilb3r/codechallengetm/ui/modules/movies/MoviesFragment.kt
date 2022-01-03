@@ -1,12 +1,15 @@
 package cu.wilb3r.codechallengetm.ui.modules.movies
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingData
@@ -16,7 +19,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import cu.wilb3r.codechallengetm.data.local.entities.DBMovie
 import cu.wilb3r.codechallengetm.data.local.mapper.toMedia
 import cu.wilb3r.codechallengetm.databinding.FragmentMoviesBinding
-import cu.wilb3r.codechallengetm.domain.model.Media
 import cu.wilb3r.codechallengetm.ef.hide
 import cu.wilb3r.codechallengetm.ef.show
 import cu.wilb3r.codechallengetm.ui.base.BaseFragment
@@ -24,14 +26,13 @@ import cu.wilb3r.codechallengetm.ui.customs.OscillatingScrollListener
 import cu.wilb3r.codechallengetm.ui.modules.movies.adapter.CategoryType
 import cu.wilb3r.codechallengetm.ui.modules.movies.adapter.LoadingAdapter
 import cu.wilb3r.codechallengetm.ui.modules.movies.adapter.MoviePageAdapter
-import cu.wilb3r.codechallengetm.ui.modules.movies.detail.DetailFragment
-import cu.wilb3r.codechallengetm.ui.modules.movies.detail.DetailFragment.Companion.MEDIA_EXTRA
 import cu.wilb3r.codechallengetm.utils.StartSnapHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class MoviesFragment @Inject constructor() : BaseFragment<FragmentMoviesBinding>() {
@@ -42,8 +43,8 @@ class MoviesFragment @Inject constructor() : BaseFragment<FragmentMoviesBinding>
     @Inject
     lateinit var topRateAdapter: MoviePageAdapter
 
-    @Inject
-    lateinit var detailFragment: DetailFragment
+    private var popularRvState: Parcelable? = null
+    private var topRatedRvState: Parcelable? = null
 
     private val vm by viewModels<MoviesViewModel>()
 
@@ -69,13 +70,18 @@ class MoviesFragment @Inject constructor() : BaseFragment<FragmentMoviesBinding>
         loadPopularJob = lifecycleScope.launch {
             popularAdapter.submitData(PagingData.from(DBMovie.LOADING_LIST))
             vm.getPopularMovies().collectLatest { pagingData ->
-                popularAdapter.submitData(pagingData.map { it.movie })
+                binding.recyclerPopular.layoutManager?.onRestoreInstanceState(popularRvState).also {
+                    popularAdapter.submitData(pagingData.map { it.movie })
+                }
             }
         }
         loadTopJob = lifecycleScope.launch {
             topRateAdapter.submitData(PagingData.from(DBMovie.LOADING_LIST))
             vm.getTop().collectLatest { pagingData ->
-                topRateAdapter.submitData(pagingData.map { it.movie })
+                binding.recyclerTopRated.layoutManager?.onRestoreInstanceState(topRatedRvState)
+                    .also {
+                        topRateAdapter.submitData(pagingData.map { it.movie })
+                    }
             }
         }
     }
@@ -89,7 +95,6 @@ class MoviesFragment @Inject constructor() : BaseFragment<FragmentMoviesBinding>
                 orientation = LinearLayoutManager.HORIZONTAL
             }
             adapter = popularAdapter.apply {
-
                 addLoadStateListener { loadState ->
                     parseLoadState(loadState)
                     setUpClickListener(loadState.source.refresh !is LoadState.Loading)
@@ -192,34 +197,37 @@ class MoviesFragment @Inject constructor() : BaseFragment<FragmentMoviesBinding>
             onRetry()
         }
         if (active) {
-            popularAdapter.setOnItemClickListener { _, item, _ ->
+            popularAdapter.setOnItemClickListener { view, title, item, _ ->
                 loadPopularJob?.cancel()
-                navigateToDetailFragment(item.toMedia())
+                val extras = FragmentNavigatorExtras(
+                    view to item.poster_path.toString(),
+                    title to item.title.toString()
+                )
+                findNavController().navigate(
+                    MoviesFragmentDirections.actionMoviesFragmentToDetailNormalFragment(
+                        item.toMedia()
+                    ), extras
+                )
             }
-            topRateAdapter.setOnItemClickListener { _, item, _ ->
+            topRateAdapter.setOnItemClickListener { view, title, item, _ ->
                 loadTopJob?.cancel()
-                navigateToDetailFragment(item.toMedia())
+                val extras = FragmentNavigatorExtras(
+                    view to item.poster_path.toString(),
+                    title to item.title.toString()
+                )
+                findNavController().navigate(
+                    MoviesFragmentDirections.actionMoviesFragmentToDetailNormalFragment(
+                        item.toMedia()
+                    ), extras
+                )
             }
         } else {
-            popularAdapter.setOnItemClickListener { _, _, _ ->
+            popularAdapter.setOnItemClickListener { _, _, _, _ ->
                 null
             }
-            topRateAdapter.setOnItemClickListener { _, _, _ ->
+            topRateAdapter.setOnItemClickListener { _, _, _, _ ->
                 null
             }
-        }
-    }
-
-    private fun navigateToDetailFragment(item: Media) {
-        val bundle = Bundle()
-        bundle.putParcelable(MEDIA_EXTRA, item)
-        try {
-            if (!detailFragment.isAdded)
-                detailFragment.apply {
-                    arguments = bundle
-                }.show(childFragmentManager, DetailFragment::class.java.name)
-        } catch (ex: Exception) {
-
         }
     }
 
@@ -227,6 +235,8 @@ class MoviesFragment @Inject constructor() : BaseFragment<FragmentMoviesBinding>
         super.onPause()
         loadPopularJob?.cancel()
         loadTopJob?.cancel()
+        popularRvState = binding.recyclerPopular.layoutManager?.onSaveInstanceState()
+        topRatedRvState = binding.recyclerTopRated.layoutManager?.onSaveInstanceState()
     }
 
     private fun onRetry() {

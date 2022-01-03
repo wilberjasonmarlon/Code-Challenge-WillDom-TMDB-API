@@ -1,4 +1,4 @@
-package cu.wilb3r.codechallengetm.ui.modules.movies.detail
+package cu.wilb3r.codechallengetm.ui.modules.detail
 
 import cu.wilb3r.codechallengetm.data.remote.model.Cast
 import cu.wilb3r.codechallengetm.data.remote.model.MediaResult

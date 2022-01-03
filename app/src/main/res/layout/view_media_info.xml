@@ -6,6 +6,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:contentInsetStartWithNavigation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="@dimen/dp_4"
+        app:navigationIcon="@drawable/ic_back">
+
+    </androidx.appcompat.widget.Toolbar>
+
     <ImageView
         android:id="@+id/backdrop_image"
         android:layout_width="match_parent"
@@ -15,7 +29,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/poster_placeholder"/>
+        android:src="@drawable/poster_foreground"/>
 
     <LinearLayout
         android:layout_width="match_parent"

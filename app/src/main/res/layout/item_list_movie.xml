@@ -7,16 +7,26 @@
     android:layout_marginEnd="@dimen/dp_8"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/video_image"
-        android:layout_width="@dimen/dp_80"
-        android:layout_height="@dimen/dp_104"
-        android:layout_margin="@dimen/dp_4"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/poster_foreground"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/dp_10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#FFFFFF">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/video_image"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_104"
+            android:scaleType="centerCrop"
+            android:foreground="@drawable/poster_foreground"
+            app:srcCompat="@drawable/poster_foreground" />
+
+    </androidx.cardview.widget.CardView>
+
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/video_title"
@@ -29,7 +39,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/video_image"
+        app:layout_constraintStart_toEndOf="@id/card_view_image"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Spider-Man: No way Home" />
 
@@ -45,7 +55,7 @@
         android:maxLines="3"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/video_image"
+        app:layout_constraintStart_toEndOf="@+id/card_view_image"
         app:layout_constraintTop_toBottomOf="@+id/video_title"/>
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -61,7 +71,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/video_image"
+        app:layout_constraintStart_toEndOf="@+id/card_view_image"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar"
         tools:text="Action, Adventure, Science Fiction" />
 

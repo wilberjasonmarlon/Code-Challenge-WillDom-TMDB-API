@@ -2,8 +2,9 @@ package cu.wilb3r.codechallengetm.ui.modules.tv.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import coil.ImageLoader
 import cu.wilb3r.codechallengetm.data.local.entities.DBTv
@@ -33,13 +34,13 @@ class TvPageAdapter @Inject constructor(
 
     }
 
-    private var onItemClickListener: ((View, DBTv, Int) -> Unit)? = null
+    private var onItemClickListener: ((ImageView, TextView, DBTv, Int) -> Unit)? = null
 
     fun setCategory(@CategoryType category: Int) {
         movieCategoryType = category
     }
 
-    fun setOnItemClickListener(listener: (View, DBTv, Int) -> Unit) {
+    fun setOnItemClickListener(listener: (ImageView, TextView, DBTv, Int) -> Unit) {
         onItemClickListener = listener
     }
 
@@ -51,8 +52,17 @@ class TvPageAdapter @Inject constructor(
             holder.apply {
                 bind(item)
                 binding.root.apply {
-                    setOnClickListener { view ->
-                        onItemClickListener?.invoke(view, item, position)
+                    when (binding) {
+                        is ItemMovieBinding -> {
+                            setOnClickListener {
+                                onItemClickListener?.invoke(binding.videoImage, binding.videoTitle, item, position)
+                            }
+                        }
+                        is ItemListMovieBinding -> {
+                            setOnClickListener {
+                                onItemClickListener?.invoke(binding.videoImage, binding.videoTitle, item, position)
+                            }
+                        }
                     }
                 }
             }

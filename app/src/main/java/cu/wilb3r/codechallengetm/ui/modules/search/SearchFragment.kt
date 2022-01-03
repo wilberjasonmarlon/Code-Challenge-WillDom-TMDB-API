@@ -6,12 +6,11 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import cu.wilb3r.codechallengetm.data.local.mapper.toMedia
 import cu.wilb3r.codechallengetm.databinding.FragmentSearchBinding
-import cu.wilb3r.codechallengetm.domain.model.Media
 import cu.wilb3r.codechallengetm.ui.base.BaseFragment
-import cu.wilb3r.codechallengetm.ui.modules.movies.detail.DetailFragment
 import cu.wilb3r.codechallengetm.ui.modules.search.adapter.SearchAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -24,13 +23,10 @@ class SearchFragment @Inject constructor() : BaseFragment<FragmentSearchBinding>
     @Inject
     lateinit var searchAdapter: SearchAdapter
 
-    @Inject
-    lateinit var detailFragment: DetailFragment
-
     private val vm by viewModels<SearchViewModel>()
     private var searchJob: Job? = null
 
-    val listener = object : SearchView.OnQueryTextListener {
+    private val listener = object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {
             return false
         }
@@ -55,6 +51,8 @@ class SearchFragment @Inject constructor() : BaseFragment<FragmentSearchBinding>
         super.initView()
         initReciclerView()
         binding.searchField.setOnQueryTextListener(listener)
+        binding.searchField.isIconified = false
+        binding.searchField.requestFocus()
     }
 
     private fun initReciclerView() {
@@ -64,19 +62,14 @@ class SearchFragment @Inject constructor() : BaseFragment<FragmentSearchBinding>
             }
             adapter = searchAdapter.apply {
                 setOnItemClickListener { searchResult, i ->
-                    navigateToDetailFragment(searchResult.toMedia())
+                    findNavController().navigate(
+                        SearchFragmentDirections.actionSearchFragmentToDetailNormalFragment(
+                            searchResult.toMedia()
+                        )
+                    )
                 }
             }
         }
-    }
-
-    private fun navigateToDetailFragment(item: Media) {
-        val bundle = Bundle()
-        bundle.putParcelable(DetailFragment.MEDIA_EXTRA, item)
-        if (!detailFragment.isAdded)
-            detailFragment.apply {
-                arguments = bundle
-            }.show(childFragmentManager, DetailFragment::class.java.name)
     }
 
     private fun search(s: String) {
