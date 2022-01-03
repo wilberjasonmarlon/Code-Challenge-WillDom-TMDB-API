@@ -55,6 +55,11 @@ class TvFragment @Inject constructor() : BaseFragment<FragmentTvBinding>() {
         savedInstanceState: Bundle?
     ) = FragmentTvBinding.inflate(layoutInflater, container, false)
 
+    override fun initTransition() {
+        super.initTransition()
+        postponeEnterTransition()
+    }
+
     override fun initView() {
         initRecyclerView()
         loadData()
@@ -111,6 +116,9 @@ class TvFragment @Inject constructor() : BaseFragment<FragmentTvBinding>() {
                     ).show()
                 }
             }
+            doOnPreDraw {
+                startPostponedEnterTransition()
+            }
         }
         binding.recyclerTopRated.apply {
             StartSnapHelper().attachToRecyclerView(this)
@@ -146,7 +154,6 @@ class TvFragment @Inject constructor() : BaseFragment<FragmentTvBinding>() {
                     }
                 }
             }
-            postponeEnterTransition()
             doOnPreDraw {
                 startPostponedEnterTransition()
             }

@@ -63,6 +63,11 @@ class MoviesFragment @Inject constructor() : BaseFragment<FragmentMoviesBinding>
         loadData()
     }
 
+    override fun initTransition() {
+        super.initTransition()
+        postponeEnterTransition()
+    }
+
 
     private fun loadData() {
         loadPopularJob?.cancel()
@@ -100,7 +105,6 @@ class MoviesFragment @Inject constructor() : BaseFragment<FragmentMoviesBinding>
                     setUpClickListener(loadState.source.refresh !is LoadState.Loading)
                 }
             }
-            postponeEnterTransition()
             doOnPreDraw {
                 startPostponedEnterTransition()
             }
@@ -140,7 +144,6 @@ class MoviesFragment @Inject constructor() : BaseFragment<FragmentMoviesBinding>
                     }
                 }
             }
-            postponeEnterTransition()
             doOnPreDraw {
                 startPostponedEnterTransition()
             }
