@@ -11,7 +11,6 @@ import com.google.gson.GsonBuilder
 import cu.wilb3r.codechallengetm.BuildConfig
 import cu.wilb3r.codechallengetm.R
 import cu.wilb3r.codechallengetm.data.remote.TMDBApiService
-import cu.wilb3r.codechallengetm.ui.modules.movies.detail.DetailFragment
 import cu.wilb3r.constant.Api
 import dagger.Module
 import dagger.Provides
@@ -83,7 +82,7 @@ object AppModule {
         return ImageLoader.Builder(application)
             .crossfade(true)
             .placeholder(R.drawable.poster_foreground)
-            .error(R.drawable.poster_foreground)
+            //.error(R.drawable.poster_foreground)
             .okHttpClient {
                 OkHttpClient.Builder()
                     .cache(CoilUtils.createDefaultCache(application))
@@ -92,6 +91,4 @@ object AppModule {
             .build()
     }
 
-    @Provides
-    fun provideDetailDialogFragment(): DetailFragment = DetailFragment()
 }

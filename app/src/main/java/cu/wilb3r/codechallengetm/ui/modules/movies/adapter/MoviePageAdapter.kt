@@ -2,8 +2,9 @@ package cu.wilb3r.codechallengetm.ui.modules.movies.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import coil.ImageLoader
 import cu.wilb3r.codechallengetm.data.local.entities.DBMovie
@@ -38,8 +39,8 @@ class MoviePageAdapter @Inject constructor(private var imageLoader: ImageLoader)
         movieCategoryType = category
     }
 
-    private var onItemClickListener: ((View, DBMovie, Int) -> Unit)? = null
-    fun setOnItemClickListener(listener: (View, DBMovie, Int) -> Unit) {
+    private var onItemClickListener: ((ImageView, TextView, DBMovie, Int) -> Unit)? = null
+    fun setOnItemClickListener(listener: (ImageView, TextView, DBMovie, Int) -> Unit) {
         onItemClickListener = listener
     }
 
@@ -51,8 +52,17 @@ class MoviePageAdapter @Inject constructor(private var imageLoader: ImageLoader)
             holder.apply {
                 bind(item)
                 binding.root.apply {
-                    setOnClickListener { view ->
-                        onItemClickListener?.invoke(binding.root, item, position)
+                    when (binding) {
+                        is ItemMovieBinding -> {
+                            setOnClickListener {
+                                onItemClickListener?.invoke(binding.videoImage, binding.videoTitle, item, position)
+                            }
+                        }
+                        is ItemListMovieBinding -> {
+                            setOnClickListener {
+                                onItemClickListener?.invoke(binding.videoImage, binding.videoTitle, item, position)
+                            }
+                        }
                     }
                 }
             }

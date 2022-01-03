@@ -1,12 +1,15 @@
 package cu.wilb3r.codechallengetm.ui.modules.tv
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingData
@@ -16,12 +19,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import cu.wilb3r.codechallengetm.data.local.entities.DBTv
 import cu.wilb3r.codechallengetm.data.local.mapper.toMedia
 import cu.wilb3r.codechallengetm.databinding.FragmentTvBinding
-import cu.wilb3r.codechallengetm.domain.model.Media
 import cu.wilb3r.codechallengetm.ui.base.BaseFragment
 import cu.wilb3r.codechallengetm.ui.customs.OscillatingScrollListener
 import cu.wilb3r.codechallengetm.ui.modules.movies.adapter.CategoryType
 import cu.wilb3r.codechallengetm.ui.modules.movies.adapter.LoadingAdapter
-import cu.wilb3r.codechallengetm.ui.modules.movies.detail.DetailFragment
 import cu.wilb3r.codechallengetm.ui.modules.tv.adapter.TvPageAdapter
 import cu.wilb3r.codechallengetm.utils.StartSnapHelper
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,8 +40,8 @@ class TvFragment @Inject constructor() : BaseFragment<FragmentTvBinding>() {
     @Inject
     lateinit var topAdapter: TvPageAdapter
 
-    @Inject
-    lateinit var detailFragment: DetailFragment
+    private var popularRvState: Parcelable? = null
+    private var topRatedRvState: Parcelable? = null
 
     private val vm by viewModels<TvViewModel>()
 
@@ -65,13 +66,18 @@ class TvFragment @Inject constructor() : BaseFragment<FragmentTvBinding>() {
         loadPopularJob = lifecycleScope.launch {
             popularAdapter.submitData(PagingData.from(DBTv.LOADING_LIST))
             vm.getPopularTv().collectLatest { pagingData ->
-                popularAdapter.submitData(pagingData.map { it.tv })
+                binding.recyclerPopular.layoutManager?.onRestoreInstanceState(popularRvState).also {
+                    popularAdapter.submitData(pagingData.map { it.tv })
+                }
             }
         }
         loadTopJob = lifecycleScope.launch {
             topAdapter.submitData(PagingData.from(DBTv.LOADING_LIST))
             vm.getTopTv().collectLatest { pagingData ->
-                topAdapter.submitData(pagingData.map { it.tv })
+                binding.recyclerTopRated.layoutManager?.onRestoreInstanceState(topRatedRvState)
+                    .also {
+                        topAdapter.submitData(pagingData.map { it.tv })
+                    }
             }
         }
     }
@@ -173,41 +179,46 @@ class TvFragment @Inject constructor() : BaseFragment<FragmentTvBinding>() {
 
     private fun setUpClickListener(active: Boolean) {
         if (active) {
-            popularAdapter.setOnItemClickListener { _, item, _ ->
+            popularAdapter.setOnItemClickListener { view, title, item, _ ->
                 loadPopularJob?.cancel()
-                navigateToDetailFragment(item.toMedia())
+                val extras = FragmentNavigatorExtras(
+                    view to item.poster_path.toString(),
+                    title to item.name.toString()
+                )
+                findNavController().navigate(
+                    TvFragmentDirections.actionTvFragmentToDetailNormalFragment(
+                        item.toMedia()
+                    ), extras
+                )
             }
-            topAdapter.setOnItemClickListener { _, item, _ ->
-                navigateToDetailFragment(item.toMedia())
+            topAdapter.setOnItemClickListener { view, title, item, _ ->
+                val extras = FragmentNavigatorExtras(
+                    view to item.poster_path.toString(),
+                    title to item.name.toString()
+                )
+                findNavController().navigate(
+                    TvFragmentDirections.actionTvFragmentToDetailNormalFragment(
+                        item.toMedia()
+                    ), extras
+                )
             }
         } else {
-            popularAdapter.setOnItemClickListener { _, _, _ ->
+            popularAdapter.setOnItemClickListener { _, _, _, _ ->
 
             }
-            topAdapter.setOnItemClickListener { _, _, _ ->
+            topAdapter.setOnItemClickListener { _, _, _, _ ->
 
             }
         }
 
-    }
-
-    private fun navigateToDetailFragment(item: Media) {
-        val bundle = Bundle()
-        bundle.putParcelable(DetailFragment.MEDIA_EXTRA, item)
-        try {
-            if (!detailFragment.isAdded)
-                detailFragment.apply {
-                    arguments = bundle
-                }.show(childFragmentManager, DetailFragment::class.java.name)
-        } catch (ex: Exception) {
-
-        }
     }
 
     override fun onPause() {
         super.onPause()
         loadPopularJob?.cancel()
         loadTopJob?.cancel()
+        popularRvState = binding.recyclerPopular.layoutManager?.onSaveInstanceState()
+        topRatedRvState = binding.recyclerTopRated.layoutManager?.onSaveInstanceState()
     }
 
     private fun onRetry() {
