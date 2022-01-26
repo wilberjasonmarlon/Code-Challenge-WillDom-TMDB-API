@@ -57,6 +57,7 @@ class SearchAdapter @Inject constructor() :
         holder.binding.apply {
             videoImage.load(Api.IMAGESURL + item.poster_path)
             videoTitle.text = item.title
+            ratingBar.rating = item.vote_average?.toFloat()?.div(2)?: 0f
             videoImage.setOnClickListener {
                 onItemClickListener?.let { click ->
                     click(item, position)

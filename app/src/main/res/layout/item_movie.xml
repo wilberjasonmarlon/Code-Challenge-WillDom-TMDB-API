@@ -54,6 +54,16 @@
         app:layout_constraintTop_toBottomOf="@+id/item_video"
         tools:text="Spider-Man: tyry erer e er" />
 
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_4"
+        android:numStars="5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/video_title" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/video_genre"
         style="@style/TextAppearance.AppCompat.Caption"
@@ -67,7 +77,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/video_title"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar"
         tools:text="Action, Adventure, Science Fiction" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

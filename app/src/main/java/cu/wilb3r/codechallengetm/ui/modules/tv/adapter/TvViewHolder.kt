@@ -24,6 +24,7 @@ class TvViewHolder(val binding: ViewBinding, val imageLoader: ImageLoader) :
                     val url = IMAGESURL + "${item.poster_path}"
                     binding.videoTitle.transitionName = item.name.toString()
                     binding.videoImage.transitionName = item.poster_path.toString()
+                    binding.ratingBar.rating = item.vote_average?.toFloat()?.div(2)?: 0f
                     binding.videoImage.load(url, imageLoader) {
                         transformations(RoundedCornersTransformation(25f))
                     }
@@ -32,9 +33,7 @@ class TvViewHolder(val binding: ViewBinding, val imageLoader: ImageLoader) :
                 is ItemListMovieBinding -> {
                     binding.videoTitle.text = "${item.name}"
                     binding.videoOverview.text = "${item.overview}"
-                    item.vote_average?.let {
-                        binding.ratingBar.text = it.toString()
-                    }
+                    binding.ratingBar.rating = item.vote_average?.toFloat()?.div(2)?: 0f
                     val url = IMAGESURL + "${item.poster_path}"
                     binding.videoTitle.transitionName = item.name.toString()
                     binding.videoImage.transitionName = item.poster_path.toString()

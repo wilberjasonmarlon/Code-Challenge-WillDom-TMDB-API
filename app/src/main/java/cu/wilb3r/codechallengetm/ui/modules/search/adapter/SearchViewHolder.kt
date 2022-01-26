@@ -17,6 +17,7 @@ class SearchViewHolder(val binding: ItemMovieBinding) :
             binding.videoImage.load(url) {
                 transformations(RoundedCornersTransformation(25f))
             }
+            binding.ratingBar.rating = item.vote_average?.toFloat()?.div(2)?: 0f
         }
     }
 }

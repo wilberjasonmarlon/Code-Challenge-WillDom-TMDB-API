@@ -27,6 +27,7 @@ class MovieViewHolder @Inject constructor(
                     val url = IMAGESURL + "${item.poster_path}"
                     binding.videoTitle.transitionName = item.title.toString()
                     binding.videoImage.transitionName = item.poster_path.toString()
+                    binding.ratingBar.rating = item.vote_average?.toFloat()?.div(2)?: 0f
                     binding.videoImage.load(url, imageLoader) {
                         transformations(RoundedCornersTransformation(25f))
                     }
@@ -34,12 +35,11 @@ class MovieViewHolder @Inject constructor(
                 is ItemListMovieBinding -> {
                     binding.videoTitle.text = "${item.title}"
                     binding.videoOverview.text = "${item.overview}"
-                    item.vote_average?.let {
-                        binding.ratingBar.text = it.toString()
-                    }
+                    binding.ratingBar.rating = item.vote_average?.toFloat()?.div(2)?: 0f
                     val url = IMAGESURL + "${item.poster_path}"
                     binding.videoTitle.transitionName = item.title.toString()
                     binding.videoImage.transitionName = item.poster_path.toString()
+                    //binding.ratingBar.rating = item.popularity?.toFloat()?:0F
                     binding.videoImage.load(url, imageLoader) {
                         transformations(RoundedCornersTransformation(25f))
                     }
